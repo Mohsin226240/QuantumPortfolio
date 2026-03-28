@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "./ThemeContext";
+import { Menu, X } from "lucide-react";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   const links = [
     { name: "Services", href: "#services" },
@@ -13,32 +11,6 @@ export function Navigation() {
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
-
-  /* ---------------- THEME SWITCH ---------------- */
-  const ThemeSwitch = () => (
-    <motion.div
-      onClick={toggleTheme}
-      className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-        theme === "light"
-          ? "bg-gradient-to-r from-cyan-600 to-purple-600"
-          : "bg-gray-700"
-      }`}
-      whileHover={{ scale: 1.05 }}
-    >
-      <motion.div
-        layout
-        className="bg-white w-6 h-6 rounded-full shadow-md flex items-center justify-center"
-        animate={{ x: theme === "light" ? 28 : 0 }}
-        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-      >
-        {theme === "light" ? (
-          <Sun size={14} className="text-cyan-500" />
-        ) : (
-          <Moon size={14} className="text-gray-200" />
-        )}
-      </motion.div>
-    </motion.div>
-  );
 
   return (
     <motion.nav
@@ -81,7 +53,6 @@ export function Navigation() {
               Start Project
             </motion.button>
 
-            <ThemeSwitch />
           </div>
 
           {/* MOBILE BUTTON */}
@@ -117,8 +88,6 @@ export function Navigation() {
           <button className="w-full py-3 bg-gradient-to-r from-cyan-500 to-magenta-500 rounded-xl text-white font-bold">
             Start Project
           </button>
-
-          <ThemeSwitch />
         </motion.div>
       )}
     </motion.nav>

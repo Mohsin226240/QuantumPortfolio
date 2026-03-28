@@ -14,19 +14,12 @@ import { Newsletter } from '../components/Newsletter';
 import { CTA } from '../components/CTA';
 import { Footer } from '../components/Footer';
 import { ParticleBackground } from '../components/ParticleBackground';
-import { useTheme } from '../components/ThemeContext';
 import {AwardsSection} from "../components/Awards";
 
 export default function LandingPage() {
-  const { theme } = useTheme();
-
   return (
     <div
-      style={{
-        backgroundColor: "var(--bg-color)",
-        color: "var(--text-color)",
-      }}
-      className="min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative"
+      className="min-h-screen bg-black text-white selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative"
     >
       {/* Particle Background */}
       <ParticleBackground />

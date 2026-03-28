@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { useTheme } from './ThemeContext';
 
 export function ParticleBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,17 +32,13 @@ export function ParticleBackground() {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.9 + 1; // small particles
-        this.speedX = (Math.random() - 0.6) * 0.5; // movement speed
+        this.size = Math.random() * 1.9 + 1;
+        this.speedX = (Math.random() - 0.6) * 0.5;
         this.speedY = (Math.random() - 0.5) * 1.0;
         this.density = Math.random() * 30 + 1;
 
-        const darkColors = ['0,255,255', '255,0,255', '255,255,255'];
-        const lightColors = ['0,0,0', '50,50,50', '100,100,100'];
-        this.color =
-          theme === 'light'
-            ? lightColors[Math.floor(Math.random() * lightColors.length)]
-            : darkColors[Math.floor(Math.random() * darkColors.length)];
+        const colors = ['0,255,255', '255,0,255', '255,255,255'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
       update() {
@@ -97,10 +91,7 @@ export function ParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 120) {
             const opacity = 1 - dist / 120;
-            ctx.strokeStyle =
-              theme === 'light'
-                ? `rgba(0,0,0,${opacity * 0.2})`
-                : `rgba(255,255,255,${opacity * 0.2})`;
+            ctx.strokeStyle = `rgba(255,255,255,${opacity * 0.2})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
@@ -115,8 +106,7 @@ export function ParticleBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Background based on theme
-      ctx.fillStyle = theme === 'light' ? '#f1f1f1' : '#000';
+      ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p) => {
@@ -137,7 +127,7 @@ export function ParticleBackground() {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]);
+  }, []);
 
   return (
     <canvas
