@@ -29,9 +29,25 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-16 sm:py-24 md:py-32 relative z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Heading */}
+        <div className="text-center mb-10 sm:mb-14 md:mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-light dark:text-white mb-4 sm:mb-6"
+          >
+            What Our <span className="text-cyan-400">Clients Say</span>
+          </motion.h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Don't just take our word for it — hear from our satisfied clients.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((t, index) =>
           <motion.div
             key={index}
@@ -49,7 +65,7 @@ export function Testimonials() {
             transition={{
               delay: index * 0.2
             }}
-            className="relative p-8 rounded-2xl bg-gray-100 dark:bg-white/5 border border-border-light dark:border-white/10 backdrop-blur-md">
+            className="relative p-5 sm:p-6 md:p-8 rounded-2xl bg-gray-100 dark:bg-white/5 border border-border-light dark:border-white/10 backdrop-blur-md">
 
               <Quote className="w-10 h-10 text-cyan-500/20 mb-6" />
               <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">"{t.quote}"</p>

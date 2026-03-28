@@ -87,13 +87,13 @@ const scrollingProjects = [...projects, ...projects];
 function ProjectCard({ project }) {
   return (
     <motion.div
-      className="relative py-20 px-5 flex-shrink-0"
+      className="relative py-8 sm:py-12 md:py-20 px-3 sm:px-5 flex-shrink-0"
       whileHover={{ y: -15, scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 250, damping: 20 }}
     >
       {/* 1. Removed <a> tag, added <div> with cursor-text */}
       <div
-        className={`relative h-[480px] w-[300px] ${project.bgColor} rounded-[2.5rem] p-7 flex flex-col overflow-hidden cursor-text shadow-xl transition-shadow hover:shadow-2xl group`}
+        className={`relative h-[380px] sm:h-[420px] md:h-[480px] w-[240px] sm:w-[270px] md:w-[300px] ${project.bgColor} rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] p-5 sm:p-6 md:p-7 flex flex-col overflow-hidden cursor-text shadow-xl transition-shadow hover:shadow-2xl group`}
       >
         {/* Header Info */}
         <div className={`relative z-10 ${project.textColor}`}>
@@ -139,9 +139,9 @@ function ProjectCard({ project }) {
 /* ---------------- MAIN PORTFOLIO SECTION ---------------- */
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 overflow-hidden min-h-screen flex flex-col justify-center items-center">
-      
-      <div className="text-center mb-10 px-6">
+    <section id="portfolio" className="py-12 sm:py-16 md:py-24 overflow-hidden min-h-[50vh] md:min-h-screen flex flex-col justify-center items-center">
+
+      <div className="text-center mb-6 sm:mb-10 px-4 sm:px-6">
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="w-12 h-[1px] bg-cyan-400/50" />
           <div className="flex items-center gap-2">
@@ -154,7 +154,7 @@ export function Portfolio() {
           <span className="w-12 h-[1px] bg-cyan-400/50" />
         </div>
 
-        <h2 className="text-text-light dark:text-white text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase">
+        <h2 className="text-text-light dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-tight uppercase">
           Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">Projects</span>
         </h2>
       </div>
@@ -177,12 +177,12 @@ export function Portfolio() {
           ))}
         </motion.div>
 
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background-light dark:from-[#05060A] to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background-light dark:from-[#05060A] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-background-light dark:from-[#05060A] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-background-light dark:from-[#05060A] to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Ye button abhi bhi clickable hai taake log sare projects dekh saken */}
-      <div className="mt-14 relative z-20">
+      <div className="mt-8 sm:mt-10 md:mt-14 relative z-20 px-4">
         <Link
           to="/projects"
           className="relative px-10 py-4 bg-transparent border border-text-light/20 dark:border-white/20 rounded-full text-text-light dark:text-white font-bold text-sm uppercase tracking-widest transition-all duration-500 hover:border-cyan-400 hover:text-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] group overflow-hidden inline-block"

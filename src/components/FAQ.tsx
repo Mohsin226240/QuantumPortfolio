@@ -31,10 +31,10 @@ const faqs = [
 export function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   return (
-    <section className="py-40 relative">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold text-text-light dark:text-white mb-6">
+    <section className="py-16 sm:py-24 md:py-32 lg:py-40 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10 sm:mb-14 md:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-light dark:text-white mb-6">
             Common <span className="text-cyan-400">Questions</span>
           </h2>
         </div>
@@ -63,15 +63,15 @@ export function FAQ() {
               onClick={() =>
               setActiveIndex(activeIndex === index ? null : index)
               }
-              className="w-full p-6 flex justify-between items-center text-left">
+              className="w-full p-4 sm:p-5 md:p-6 flex justify-between items-center text-left gap-3">
 
                 <span
-                className={`text-xl font-medium ${activeIndex === index ? 'text-text-light dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+                className={`text-base sm:text-lg md:text-xl font-medium ${activeIndex === index ? 'text-text-light dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
 
                   {faq.question}
                 </span>
                 <div
-                className={`p-2 rounded-full ${activeIndex === index ? 'bg-cyan-500 text-black' : 'bg-gray-200 dark:bg-white/10 text-text-light dark:text-white'}`}>
+                className={`p-1.5 sm:p-2 rounded-full flex-shrink-0 ${activeIndex === index ? 'bg-cyan-500 text-black' : 'bg-gray-200 dark:bg-white/10 text-text-light dark:text-white'}`}>
 
                   {activeIndex === index ?
                 <Minus className="w-4 h-4" /> :

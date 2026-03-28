@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://nabeeltahirdeveloper.github.io/Quantum-Portfolio",
   "scripts": {
-    "dev": "npx vite",
+    "dev": "node api.js && npx vite",
     "build": "npx vite build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "preview": "npx vite preview",

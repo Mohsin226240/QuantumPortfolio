@@ -45,7 +45,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-        className="relative h-full p-8 rounded-2xl bg-gray-100 dark:bg-white/5 border border-border-light dark:border-white/10 backdrop-blur-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors group cursor-pointer"
+        className="relative h-full p-5 sm:p-6 md:p-8 rounded-2xl bg-gray-100 dark:bg-white/5 border border-border-light dark:border-white/10 backdrop-blur-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors group cursor-pointer"
       >
         <div
           style={{ transform: 'translateZ(40px)' }}
@@ -54,7 +54,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           <service.icon className="w-8 h-8" />
         </div>
 
-        <h3 style={{ transform: 'translateZ(25px)' }} className="text-2xl font-bold text-text-light dark:text-white mb-4">
+        <h3 style={{ transform: 'translateZ(25px)' }} className="text-xl sm:text-2xl font-bold text-text-light dark:text-white mb-3 sm:mb-4">
           {service.title}
         </h3>
         <p style={{ transform: 'translateZ(15px)' }} className="text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">
@@ -70,24 +70,24 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 export function Services() {
   return (
-    <section id="services" className="py-32 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
+    <section id="services" className="py-16 sm:py-24 md:py-32 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10 sm:mb-14 md:mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="text-4xl md:text-6xl font-bold text-text-light dark:text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-light dark:text-white mb-4 sm:mb-6"
           >
             Our <span className="text-cyan-400">Services</span>
           </motion.h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Comprehensive digital solutions engineered for the modern web.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
