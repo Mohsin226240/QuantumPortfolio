@@ -17,15 +17,15 @@ export function Navigation() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-[999] px-6 py-4"
+      className="fixed top-0 left-0 right-0 z-[999] px-3 sm:px-6 py-3 sm:py-4"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="backdrop-blur-xl bg-gray-100/90 dark:bg-black/70 border border-border-light dark:border-white/10 rounded-2xl px-6 py-4 flex items-center justify-between shadow-lg transition-colors duration-300">
+        <div className="backdrop-blur-xl bg-gray-100/90 dark:bg-black/70 border border-border-light dark:border-white/10 rounded-xl sm:rounded-2xl px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between shadow-lg transition-colors duration-300">
           
           {/* LOGO */}
           <a
             href="#"
-            className="text-2xl font-bold tracking-tighter text-gray-900 dark:text-white"
+            className="text-lg sm:text-2xl font-bold tracking-tighter text-gray-900 dark:text-white"
           >
             QuantumByte
             <span className="text-cyan-400">.AGENCY</span>
@@ -72,7 +72,7 @@ export function Navigation() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25 }}
-          className="absolute top-28 left-6 right-6 p-6 backdrop-blur-xl bg-gray-100/95 dark:bg-black/90 border border-border-light dark:border-white/10 rounded-2xl md:hidden flex flex-col space-y-4"
+          className="absolute top-20 sm:top-24 left-3 sm:left-6 right-3 sm:right-6 p-4 sm:p-6 backdrop-blur-xl bg-gray-100/95 dark:bg-black/90 border border-border-light dark:border-white/10 rounded-xl sm:rounded-2xl md:hidden flex flex-col space-y-3 sm:space-y-4"
         >
           {links.map((link) => (
             <a

@@ -62,16 +62,16 @@ const awards = [
 
 export function AwardsSection() {
   return (
-    <section className="relative w-full py-24 px-6 bg-transparent overflow-hidden">
+    <section className="relative w-full py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-transparent overflow-hidden">
       <style>{floatingAnimation}</style>
       
       <div className="max-w-[1400px] mx-auto relative z-10">
         
         {/* Header - No Transitions for Instant Switch */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 md:mb-24 gap-6 sm:gap-8">
           <div>
-            <span className="text-cyan-500 font-bold tracking-[0.4em] uppercase text-sm mb-4 block italic">Our Milestones</span>
-            <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[0.9] md:leading-[0.85]">
+            <span className="text-cyan-500 font-bold tracking-[0.2em] sm:tracking-[0.4em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block italic">Our Milestones</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[0.95] md:leading-[0.85]">
              AWARDS & <br />
              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
              RECOGNITIONS
@@ -86,7 +86,7 @@ export function AwardsSection() {
         </div>
 
         {/* Optimized Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {awards.map((item) => (
             <div 
               key={item.id} 
@@ -94,10 +94,10 @@ export function AwardsSection() {
               style={{ animationDelay: item.delay }}
             >
               {/* Neon Glow (Only on Hover) */}
-              <div className="absolute inset-0 rounded-[2.5rem] bg-transparent group-hover:bg-cyan-500/20 group-hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] border-2 border-transparent group-hover:border-cyan-400/60 transition-all duration-150 pointer-events-none" />
+              <div className="absolute inset-0 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] bg-transparent group-hover:bg-cyan-500/20 group-hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] border-2 border-transparent group-hover:border-cyan-400/60 transition-all duration-150 pointer-events-none" />
               
               {/* Main Card - Transitions removed for instant theme switching */}
-              <div className="relative h-[460px] w-full rounded-[2.4rem] bg-white dark:bg-[#0f0f0ff5] border border-slate-200 dark:border-white/5 p-8 flex flex-col justify-between overflow-hidden shadow-xl group-hover:border-cyan-400/50 transition-shadow duration-150">
+              <div className="relative min-h-[340px] sm:min-h-[400px] lg:min-h-[460px] w-full rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.4rem] bg-white dark:bg-[#0f0f0ff5] border border-slate-200 dark:border-white/5 p-5 sm:p-6 md:p-8 flex flex-col justify-between overflow-hidden shadow-xl group-hover:border-cyan-400/50 transition-shadow duration-150">
                 
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] pointer-events-none bg-[radial-gradient(#808080_1px,transparent_1px)] [background-size:20px_20px]" />

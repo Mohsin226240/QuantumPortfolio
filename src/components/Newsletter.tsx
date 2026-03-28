@@ -19,9 +19,9 @@ function HumanModel() {
 
 export function Newsletter() {
   return (
-    <section className="py-20 relative overflow-visible">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
           {/* Left Side - Text & Form */}
           <motion.div
@@ -30,7 +30,7 @@ export function Newsletter() {
             viewport={{ once: true }}
             transition={{ duration: 1.0, ease: 'easeOut' }}
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-text-light dark:text-white mb-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-light dark:text-white mb-4">
               Stay in the Loop
             </h3>
             <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
@@ -60,7 +60,7 @@ export function Newsletter() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.0, ease: 'easeOut' }}
-            className="w-full h-[500px] relative overflow-visible"
+            className="w-full h-[300px] sm:h-[400px] lg:h-[500px] relative overflow-hidden"
           >
             <Canvas
               camera={{ position: [0, 1.5, 4], fov: 50 }}

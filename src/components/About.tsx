@@ -37,8 +37,8 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-32 relative overflow-visible">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="py-16 sm:py-24 md:py-32 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* Text Content */}
@@ -48,7 +48,7 @@ export function About() {
             viewport={{ once: true }}
             transition={{ duration: 1.0, ease: 'easeOut' }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-text-light dark:text-text-dark mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-light dark:text-text-dark mb-6">
               Crafting the <span className="text-magenta-500">Impossible</span>
             </h2>
 
@@ -88,7 +88,7 @@ export function About() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.0, ease: 'easeOut' }}
-            className="relative w-full h-[650px] overflow-visible" // canvas fills the space freely
+            className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[650px] overflow-hidden"
           >
             <Canvas
               camera={{ position: [0, 1.5, 5], fov: 50 }}

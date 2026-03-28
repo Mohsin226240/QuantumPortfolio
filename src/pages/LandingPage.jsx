@@ -25,7 +25,7 @@ export default function LandingPage() {
       <ParticleBackground />
       <Navigation />
       <div
-        className="relative z-10 will-change-transform pt-32"
+        className="relative z-10 will-change-transform pt-24 sm:pt-28 md:pt-32"
         style={{ transform: 'translateZ(0)' }}
       >
         <Hero />

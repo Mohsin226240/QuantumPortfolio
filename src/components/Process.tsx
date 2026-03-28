@@ -33,13 +33,13 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="py-40  relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-24">
-          <span className="text-cyan-400 text-sm font-bold tracking-widest uppercase mb-4 block">
+    <section className="py-16 sm:py-24 md:py-32 lg:py-40 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12 sm:mb-16 md:mb-24">
+          <span className="text-cyan-400 text-xs sm:text-sm font-bold tracking-widest uppercase mb-3 sm:mb-4 block">
             How We Work
           </span>
-          <h2 className="text-5xl md:text-7xl font-bold text-text-light dark:text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-text-light dark:text-white">
             The{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
               Process
@@ -49,9 +49,9 @@ export function Process() {
 
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-white/10 -translate-y-1/2 hidden md:block" />
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-white/10 -translate-y-1/2 hidden lg:block" />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
             {steps.map((step, index) =>
             <motion.div
               key={index}
