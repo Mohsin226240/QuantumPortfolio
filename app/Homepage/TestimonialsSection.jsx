@@ -121,7 +121,7 @@ function Card({ date, name, stars, text, image, index, isMobile, isTablet }) {
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 5,
           fontSize: 11, color: "#16a34a",
-          background: "#ffffff", border: "1px solid #bbf7d0",
+          background: "#f0fdf4", border: "1px solid #bbf7d0",
           borderRadius: 99, padding: "3px 10px", width: "fit-content",
         }}>
           &#10003; Verified Trader
@@ -133,20 +133,21 @@ function Card({ date, name, stars, text, image, index, isMobile, isTablet }) {
   // Tablet & Desktop: horizontal card with side image
   return (
     <motion.div
-      whileHover={{ y: -12, scale: 1.02 }}
-      transition={{ duration: 0.25 }}
+      initial={{ opacity: 0, y: 28, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true }}
+      whileHover={{ y: -4, scale: 1.015, transition: { duration: 0.22 } }}
       style={{
         flexShrink: 0,
         width: "100%",
-        borderRadius: 16,
+        borderRadius: 14,
         overflow: "hidden",
         background: "#ffffff",
-        border: "1.5px solid #e5e7eb",
+        border: "1px solid #e5e7eb",
         display: "flex",
         flexDirection: "row",
         cursor: "default",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
-        minHeight: 260,
       }}
     >
       {/* Left: Text */}
@@ -164,7 +165,7 @@ function Card({ date, name, stars, text, image, index, isMobile, isTablet }) {
           marginTop: 16,
           display: "inline-flex", alignItems: "center", gap: 5,
           fontSize: 11, color: "#16a34a",
-          background: "#ffffff", border: "1px solid #bbf7d0",
+          background: "#f0fdf4", border: "1px solid #bbf7d0",
           borderRadius: 99, padding: "3px 10px", width: "fit-content",
         }}>
           &#10003; Verified Trader
@@ -180,7 +181,7 @@ function Card({ date, name, stars, text, image, index, isMobile, isTablet }) {
           src={image}
           alt={name}
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          whileHover={{ scale: 1.03 }}
+          whileHover={{ scale: 1.06 }}
           transition={{ duration: 0.4 }}
         />
       </div>
@@ -225,7 +226,7 @@ export default function TestimonialsSection() {
 
   return (
     <section id="testimonials" style={{
-      background: "#ffffff",
+      background: "#f9fafb",
       padding: isMobile ? "48px 16px" : isTablet ? "60px 24px" : "72px 40px",
       fontFamily: "'DM Sans', sans-serif",
       overflow: "hidden",
@@ -288,12 +289,9 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginTop: 24 }}>
-            <img src="/ppl.png" alt="Our traders" style={{ width: isMobile ? 180 : 260, height: "auto", objectFit: "contain" }} draggable={false} />
-            <div style={{ display: "flex", gap: 10 }}>
-              <button style={btnStyle()} onClick={prev}><ChevronLeft size={16} /></button>
-              <button style={btnStyle()} onClick={next}><ChevronRight size={16} /></button>
-            </div>
+          <div style={{ display: "flex", gap: 10 }}>
+            <button style={btnStyle()} onClick={prev}><ChevronLeft size={16} /></button>
+            <button style={btnStyle()} onClick={next}><ChevronRight size={16} /></button>
           </div>
         </motion.div>
 
@@ -301,8 +299,6 @@ export default function TestimonialsSection() {
         <div style={{
           overflow: "hidden",
           maxWidth: isMobile ? "100%" : containerWidth,
-          padding: "16px 0",
-          margin: "-16px 0",
         }}>
           <motion.div
             style={{

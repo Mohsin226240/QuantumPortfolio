@@ -2,121 +2,120 @@
 
 import React from "react";
 import { TrendingUp } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaTelegram, FaYoutube, FaChevronRight } from "react-icons/fa6";
+import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaChevronRight } from "react-icons/fa6";
 
 export default function BigFooter({ scrollTo, handleStartTrading }) {
+  const footerLinks = {
+    "Company": [
+      { label: "Free Demo Account", id: null },
+      { label: "About Elite Fusion", id: null },
+      { label: "Partners", id: null },
+      { label: "Contact", id: "contact" },
+    ],
+    "Evaluation": [
+      { label: "Elite Fusion Evaluation", id: null },
+      { label: "Trading Platforms", id: "features" },
+      { label: "Crypto Trading Rules", id: "markets" },
+    ],
+    "Documentation": [
+      { label: "Blog", id: null },
+      { label: "FAQ", id: "faq" },
+      { label: "Privacy Policy", id: null },
+      { label: "Terms and Conditions", id: null },
+      { label: "Knowledge Base", id: null },
+    ],
+  };
+  const footerColumnOrder = ["Company", "Evaluation", "Documentation"];
+
   return (
-    <footer style={{ background: "#fafafa", borderTop: "1px solid #e5e7eb" }}>
-      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+    <footer
+      className="relative"
+      style={{
+        background: "#f8fdfb",
+        borderTop: "1px solid rgba(16,185,129,0.12)",
+      }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(16,185,129,0.6),transparent)" }} />
 
-        {/* ── Top: Logo + Description + Links ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 py-10 sm:py-14 border-b border-gray-200">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+        {/* Main footer grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b" style={{ borderColor: "rgba(16,185,129,0.1)" }}>
 
-          {/* Logo + About */}
-          <div className="col-span-2 sm:col-span-2 lg:col-span-4">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg,#10b981,#059669)" }}>
+          {/* Brand column — takes 2 cols on lg */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-500/25 flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#059669,#0d9488)" }}>
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <span className="font-bold text-base text-gray-900">Elite<span className="text-emerald-500">Fusion</span></span>
+              <div>
+                <span className="font-bold text-[15px]" style={{ letterSpacing: "-0.02em", color: "#1e293b" }}>Elite Fusion</span>
+                <span className="font-bold text-[15px] text-emerald-500" style={{ letterSpacing: "-0.02em" }}> Trading</span>
+              </div>
             </div>
-            <h3 className="font-bold text-sm text-gray-900 leading-snug mb-2">
-              Become a pro trader with EliteFusion
-            </h3>
-            <p className="text-[13px] leading-relaxed text-gray-500 mb-3 max-w-sm">
-              Join EliteFusion, the premier online trading platform, and unlock your potential as a pro trader. With access to Forex, stocks, and crypto, you can easily diversify your trading portfolio.
+            <p className="text-[12px] leading-[1.7] mb-4 max-w-[240px]" style={{ color: "#64748b" }}>
+              Backed by the community. Trade smarter with tools built for real traders.
             </p>
-            <p className="text-[12px] leading-relaxed text-gray-400 mb-5 max-w-sm">
-              A reliable trading platform is essential for success. We provide a safe and comfortable experience with institutional-grade tools and 24/7 support.
-            </p>
-            <div className="flex gap-2.5">
+
+            {/* Social icons */}
+            <div className="flex gap-2 mb-4">
               {[
-                { Icon: FaFacebookF, href: "#", color: "#1877F2" },
-                { Icon: FaInstagram, href: "#", color: "#E4405F" },
-                { Icon: FaTelegram, href: "#", color: "#26A5E4" },
-                { Icon: FaYoutube, href: "#", color: "#FF0000" },
-              ].map(({ Icon, href, color }, i) => (
-                <a key={i} href={href} className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:-translate-y-1 hover:shadow-md hover:border-emerald-200 transition-all duration-300" style={{ color }}>
-                  <Icon className="h-3.5 w-3.5" />
+                { Icon: FaXTwitter, color: "#000000", bg: "rgba(0,0,0,0.07)", border: "rgba(0,0,0,0.12)", hoverBg: "rgba(0,0,0,0.14)", href: "https://x.com" },
+                { Icon: FaFacebookF, color: "#1877F2", bg: "rgba(24,119,242,0.1)", border: "rgba(24,119,242,0.2)", hoverBg: "rgba(24,119,242,0.18)", href: "https://facebook.com" },
+                { Icon: FaInstagram, color: "#E4405F", bg: "rgba(228,64,95,0.1)", border: "rgba(228,64,95,0.2)", hoverBg: "rgba(228,64,95,0.18)", href: "https://instagram.com" },
+                { Icon: FaLinkedinIn, color: "#0A66C2", bg: "rgba(10,102,194,0.1)", border: "rgba(10,102,194,0.2)", hoverBg: "rgba(10,102,194,0.18)", href: "https://linkedin.com" },
+                { Icon: FaYoutube, color: "#FF0000", bg: "rgba(255,0,0,0.1)", border: "rgba(255,0,0,0.2)", hoverBg: "rgba(255,0,0,0.18)", href: "https://youtube.com" },
+              ].map(({ Icon, color, bg, border, hoverBg, href }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300"
+                  style={{ border: `1px solid ${border}`, background: bg }}
+                  onMouseOver={e => { e.currentTarget.style.background = hoverBg; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 4px 14px ${bg}`; }}
+                  onMouseOut={e => { e.currentTarget.style.background = bg; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                  <Icon className="h-3.5 w-3.5" style={{ color }} />
                 </a>
               ))}
             </div>
+
+            {/* Status badge */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-medium" style={{ color: "#64748b" }}>All systems operational</span>
+            </div>
           </div>
 
-          {/* Trading */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="font-bold text-[13px] text-gray-900 mb-4">Trading</h4>
-            <ul className="flex flex-col gap-2.5">
-              {["How to trade", "Stocks", "Forex", "Crypto", "Account", "Free demo account", "Promotions", "Withdrawals", "Assets & Conditions"].map((item) => (
-                <li key={item}>
-                  <button onClick={handleStartTrading} className="group flex items-center gap-1 text-[13px] text-gray-500 hover:text-emerald-600 bg-transparent border-none cursor-pointer transition-all duration-300 p-0 hover:scale-[1.05] hover:translate-x-1 origin-left">
-                    {item}
-                    <FaChevronRight className="h-[8px] w-[8px] text-emerald-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* About */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="font-bold text-[13px] text-gray-900 mb-4">About</h4>
-            <ul className="flex flex-col gap-2.5">
-              {["Social media", "Contacts", "News", "Awards", "Affiliate Program", "Reviews"].map((item) => (
-                <li key={item}>
-                  <button onClick={handleStartTrading} className="group flex items-center gap-1 text-[13px] text-gray-500 hover:text-emerald-600 bg-transparent border-none cursor-pointer transition-all duration-300 p-0 hover:scale-[1.05] hover:translate-x-1 origin-left">
-                    {item}
-                    <FaChevronRight className="h-[8px] w-[8px] text-emerald-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Help */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="font-bold text-[13px] text-gray-900 mb-4">Help</h4>
-            <ul className="flex flex-col gap-2.5">
-              {[
-                { label: "FAQ", action: () => scrollTo("faq") },
-                { label: "Support", action: handleStartTrading },
-                { label: "Learning Center", action: handleStartTrading },
-                { label: "Contact Us", action: () => scrollTo("contact") },
-              ].map(({ label, action }) => (
-                <li key={label}>
-                  <button onClick={action} className="group flex items-center gap-1 text-[13px] text-gray-500 hover:text-emerald-600 bg-transparent border-none cursor-pointer transition-all duration-300 p-0 hover:scale-[1.05] hover:translate-x-1 origin-left">
-                    {label}
-                    <FaChevronRight className="h-[8px] w-[8px] text-emerald-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="font-bold text-[13px] text-gray-900 mb-4">Legal</h4>
-            <ul className="flex flex-col gap-2.5">
-              {["Privacy Policy", "Terms of Service", "Risk Disclosure", "AML Policy"].map((item) => (
-                <li key={item}>
-                  <button onClick={handleStartTrading} className="group flex items-center gap-1 text-[13px] text-gray-500 hover:text-emerald-600 bg-transparent border-none cursor-pointer transition-all duration-300 p-0 hover:scale-[1.05] hover:translate-x-1 origin-left">
-                    {item}
-                    <FaChevronRight className="h-[8px] w-[8px] text-emerald-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link columns */}
+          {footerColumnOrder.map(category => (
+            <div key={category}>
+              <h4 className="font-bold text-[12px] mb-3 uppercase tracking-wide" style={{ color: "#1e293b" }}>{category}</h4>
+              <ul className="flex flex-col gap-2">
+                {footerLinks[category].map(({ label, id }) => (
+                  <li key={label}>
+                    <button onClick={id ? () => scrollTo(id) : handleStartTrading}
+                      className="flex items-center gap-1 text-[13px] bg-transparent border-none cursor-pointer transition-colors duration-150"
+                      style={{ color: "#64748b" }}
+                      onMouseOver={e => e.currentTarget.style.color = "#059669"}
+                      onMouseOut={e => e.currentTarget.style.color = "#64748b"}>
+                      <FaChevronRight className="h-[8px] w-[8px]" style={{ color: "#059669" }} />
+                      {label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* ── Bottom: Copyright ── */}
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-400">
-            &copy; 2024-2026 EliteFusion. All rights reserved.
+        {/* Disclaimer — compact */}
+        <div className="pt-5 text-center">
+          <p className="text-[11px] leading-[1.75] max-w-2xl mx-auto mb-2" style={{ color: "#94a3b8" }}>
+            Elite Fusion Trading provides tools for crypto, forex, and global market access through regulated infrastructure. We don't offer financial advice. Your funds stay in segregated accounts, fully encrypted, with 24/7 support. Trading involves risk — only trade what you can afford to lose.
           </p>
-          <p className="text-[11px] text-gray-400">
-            Trading involves risk. Past performance is not indicative of future results.
-          </p>
+
+          <div className="mt-4 pt-4 border-t" style={{ borderColor: "rgba(16,185,129,0.08)" }}>
+            <p className="text-[10px]" style={{ color: "#b0b8c4" }}>
+              © 2025 Elite Fusion Trading. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -163,9 +163,9 @@ function HowItWorksCard({ num, title, desc, image, index }) {
           background: "#fff",
           border: `1px solid ${hov ? "rgba(16,185,129,0.2)" : "rgba(0,0,0,0.06)"}`,
           boxShadow: hov
-            ? "0 20px 50px rgba(16,185,129,0.15), 0 8px 20px rgba(16,185,129,0.1)"
+            ? "0 20px 50px rgba(0,0,0,0.22), 0 8px 20px rgba(0,0,0,0.15)"
             : "0 1px 8px rgba(0,0,0,0.04)",
-          transform: hov ? "translateY(-14px) scale(1.03)" : "translateY(0) scale(1)",
+          transform: hov ? "translateY(-6px)" : "translateY(0)",
           transition: "all 0.6s cubic-bezier(0.25,0.1,0.25,1)",
           cursor: "default",
           overflow: "hidden",
@@ -177,30 +177,29 @@ function HowItWorksCard({ num, title, desc, image, index }) {
         <div style={{
           overflow: "hidden",
           borderRadius: "20px 20px 0 0",
+          height: 220,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-        }}
-        className="h-[200px] sm:h-[210px] md:h-[220px]"
-        >
+        }}>
           <img
             src={image}
             alt={title}
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "contain",
+              objectFit: "cover",
               display: "block",
-              transform: hov ? "scale(1.05)" : "scale(1)",
+              transform: hov ? "scale(1.15)" : "scale(1.08)",
               transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
             }}
           />
         </div>
 
-        <div style={{ padding: "14px 16px 18px", flex: 1 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", marginBottom: 6, color: "#059669" }}>{num}</p>
-          <h3 style={{ fontWeight: 600, fontSize: 15, marginBottom: 5, color: "#111827" }}>{title}</h3>
-          <p style={{ fontSize: 13, lineHeight: 1.6, color: "#7a8194", margin: 0 }}>{desc}</p>
+        <div style={{ padding: "16px 20px 20px", flex: 1 }}>
+          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", marginBottom: 8, color: "#059669" }}>{num}</p>
+          <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 6, color: "#111827" }}>{title}</h3>
+          <p style={{ fontSize: 14, lineHeight: 1.6, color: "#7a8194", margin: 0 }}>{desc}</p>
         </div>
       </div>
     </motion.div>
@@ -230,11 +229,11 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="bg-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors">
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-5xl mx-auto">
 
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }} viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-12">
+          style={{ textAlign: "center", marginBottom: 48 }}>
           <h2 style={{
             fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)",
             fontWeight: 800,
@@ -253,7 +252,7 @@ export default function HowItWorksSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid md:grid-cols-3 gap-5">
           {steps.map(({ num, title, desc, image }, i) => (
             <HowItWorksCard key={i} num={num} title={title} desc={desc} image={image} index={i} />
           ))}

@@ -6,31 +6,28 @@ import { motion, useInView } from "framer-motion";
 
 function MiniChart({ positive }) {
   const pts = React.useMemo(() => {
-    let v = positive ? 35 : 65;
-    return Array.from({ length: 24 }, (_, i) => {
-      const spike = (Math.random() - 0.5) * 18;
-      const trend = positive ? 1.2 : -1.2;
-      v += spike + trend;
-      v = Math.max(8, Math.min(92, v));
-      return v;
+    let v = 50;
+    return Array.from({ length: 16 }, () => {
+      v += (Math.random() - (positive ? 0.43 : 0.57)) * 7;
+      return Math.max(15, Math.min(85, v));
     });
   }, [positive]);
-  const w = 80, h = 32;
+  const w = 70, h = 28;
   const xs = pts.map((_, i) => (i / (pts.length - 1)) * w);
   const ys = pts.map(p => h - (p / 100) * h);
-  const line = xs.map((x, i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
-  const area = line + ` L${w},${h} L0,${h} Z`;
-  const color = positive ? "#10b981" : "#ef4444";
-
+  const d = xs.map((x, i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
+  const color = positive ? "#059669" : "#ef4444";
+  
   return (
-    <svg width={w} height={h} style={{ display: "block" }}>
-      <path
-        d={line}
-        fill="none"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="bevel"
-        opacity="0.7"
+    <svg width={w} height={h} style={{ display: 'block' }}>
+      <path 
+        d={d} 
+        fill="none" 
+        stroke={color} 
+        strokeWidth="2.5" 
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.85"
       />
     </svg>
   );
@@ -79,8 +76,8 @@ export default function MarketsSection({ markets, handleStartTrading }) {
           box-shadow: 0 2px 12px rgba(5, 150, 105, 0.06);
         }
         .trade-btn {
-          opacity: 1;
-          transform: translateX(0);
+          opacity: 0;
+          transform: translateX(-8px);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
@@ -143,13 +140,13 @@ export default function MarketsSection({ markets, handleStartTrading }) {
         }
       `}</style>
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-8 text-center"
         >
           <h2 style={{
@@ -173,152 +170,184 @@ export default function MarketsSection({ markets, handleStartTrading }) {
 
         {/* Table Container */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="rounded-xl shadow-lg shadow-slate-200/60 border border-slate-200 overflow-hidden relative overflow-x-hidden"
-          style={{ background: "rgba(255,255,255,0.88)" }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          className="bg-white rounded-xl shadow-lg shadow-slate-200/60 border border-slate-200 overflow-hidden"
         >
-          {/* Background image inside card */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: "url('/market.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: 0.4,
-            }}
-          />
-          <div className="absolute inset-0 pointer-events-none bg-white/60" />
-
+          
           {/* Table Header */}
-          <div className="relative z-10 bg-gradient-to-r from-slate-50/90 to-white/90 backdrop-blur-sm px-3 sm:px-5 py-3 border-b border-slate-200">
+          <div className="bg-gradient-to-r from-slate-50 to-white px-5 py-3 border-b border-slate-200">
             <div className="flex items-center gap-2">
               <Activity className="w-4 h-4 text-emerald-600" />
               <h3 className="text-sm font-bold text-slate-900">Market Overview</h3>
             </div>
           </div>
 
-          {/* Grid Layout */}
-          <div className="relative z-10 px-2 sm:px-5">
-            {/* Header Row - Mobile */}
-            <div className="grid sm:hidden border-b border-slate-100 py-2.5" style={{ gridTemplateColumns: "2fr 1fr" }}>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-2">Asset</span>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-2 text-right">Trade</span>
-            </div>
-            {/* Header Row - Tablet+ */}
-            <div className="hidden sm:grid border-b border-slate-100 py-2.5" style={{ gridTemplateColumns: "2fr 1.2fr 1.2fr 1fr" }}>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-3">Asset</span>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-3">Volume</span>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-3">Market Cap</span>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider px-3 text-center block">Trade</span>
-            </div>
-
-            {/* Data Rows */}
-            {markets.map((m, i) => (
-              <React.Fragment key={i}>
-                {/* Mobile Row */}
-                <motion.div
-                  className="market-row sm:hidden grid items-center border-b border-slate-50 py-3 cursor-pointer"
-                  style={{ gridTemplateColumns: "2fr 1fr" }}
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.07 }}
-                >
-                  <div className="flex items-center gap-2 px-2">
-                    <div className="coin-icon w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md shadow-emerald-500/25 flex-shrink-0">
-                      <span className="text-white font-black text-[10px]">
-                        {m.name.replace("USDT", "").substring(0, 2)}
-                      </span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-bold text-slate-900 text-sm leading-tight">{m.name.replace("USDT", "")}</p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-[11px] text-slate-500">${m.price}</span>
-                        <span className={`text-[10px] font-bold ${m.positive ? 'text-green-600' : 'text-red-500'}`}>{m.change}</span>
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-slate-100 bg-slate-50/50">
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Asset</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Price</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">24h</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Chart</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Volume</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Market Cap</span>
+                  </th>
+                  <th className="px-4 py-2.5 text-right">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Trade</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {markets.map((m, i) => (
+                  <motion.tr
+                    key={i}
+                    className="market-row cursor-pointer"
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ 
+                      duration: 0.35, 
+                      delay: 0.25 + i * 0.05,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
+                  >
+                    {/* Asset */}
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="coin-icon w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md shadow-emerald-500/25">
+                          <span className="text-white font-black text-xs">
+                            {m.name.replace("USDT", "").substring(0, 2)}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-900 text-sm leading-tight">
+                            {m.name.replace("USDT", "")}
+                          </p>
+                          <p className="text-[10px] text-slate-500 font-medium">{m.name}</p>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="px-2 flex justify-end">
-                    <button
-                      onClick={handleStartTrading}
-                      className="trade-btn inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 text-white font-bold text-[11px] rounded-lg shadow-md shadow-emerald-500/25"
-                    >
-                      Trade
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  </div>
-                </motion.div>
+                    </td>
 
-                {/* Desktop/Tablet Row */}
-                <motion.div
-                  className="market-row hidden sm:grid items-center border-b border-slate-50 py-3 cursor-pointer"
-                  style={{ gridTemplateColumns: "2fr 1.2fr 1.2fr 1fr" }}
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.07 }}
-                >
-                  <div className="flex items-center gap-2.5 px-3">
-                    <div className="coin-icon w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md shadow-emerald-500/25 flex-shrink-0">
-                      <span className="text-white font-black text-xs">
-                        {m.name.replace("USDT", "").substring(0, 2)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-sm leading-tight">{m.name.replace("USDT", "")}</p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-[11px] text-slate-500">${m.price}</span>
-                        <span className={`text-[10px] font-bold ${m.positive ? 'text-green-600' : 'text-red-500'}`}>{m.change}</span>
+                    {/* Price */}
+                    <td className="px-4 py-3">
+                      <p className="font-mono font-bold text-slate-900 text-sm">${m.price}</p>
+                    </td>
+
+                    {/* 24h Change */}
+                    <td className="px-4 py-3">
+                      <div className={`price-badge inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-bold text-xs ${
+                        m.positive 
+                          ? 'bg-green-50 text-green-600 border border-green-200' 
+                          : 'bg-red-50 text-red-600 border border-red-200'
+                      }`}>
+                        {m.positive ? (
+                          <TrendingUp className="w-3 h-3" />
+                        ) : (
+                          <TrendingDown className="w-3 h-3" />
+                        )}
+                        <span>{m.change}</span>
                       </div>
-                    </div>
-                  </div>
-                  <div className="px-3">
-                    <MiniChart positive={m.positive} />
-                    <p className="font-mono text-slate-700 font-semibold text-[11px] mt-1">{m.volume}</p>
-                  </div>
-                  <div className="px-3">
-                    <p className="font-mono text-slate-700 font-semibold text-sm">{m.marketCap}</p>
-                  </div>
-                  <div className="px-3 text-center">
-                    <button
-                      onClick={handleStartTrading}
-                      className="trade-btn inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 text-white font-bold text-xs rounded-lg shadow-md shadow-emerald-500/25"
-                    >
-                      Trade
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </motion.div>
-              </React.Fragment>
-            ))}
+                    </td>
+
+                    {/* Chart */}
+                    <td className="px-4 py-3">
+                      <MiniChart positive={m.positive} />
+                    </td>
+
+                    {/* Volume */}
+                    <td className="px-4 py-3">
+                      <p className="font-mono text-slate-700 font-semibold text-sm">{m.volume}</p>
+                    </td>
+
+                    {/* Market Cap */}
+                    <td className="px-4 py-3">
+                      <p className="font-mono text-slate-700 font-semibold text-sm">{m.marketCap}</p>
+                    </td>
+
+                    {/* Action */}
+                    <td className="px-4 py-3 text-right">
+                      <button 
+                        onClick={handleStartTrading}
+                        className="trade-btn inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 text-white font-bold text-xs rounded-lg shadow-md shadow-emerald-500/25"
+                      >
+                        Trade
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </motion.div>
 
         {/* Stats Cards */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="mt-10"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {[
-              { icon: BarChart3, label: "Total Markets", value: markets.length, sub: "Live pairs" },
-              { icon: TrendingUp, label: "24h Volume", value: "$3.2B", sub: "+12.4% today" },
-              { icon: Users, label: "Active Traders", value: "12K+", sub: "Worldwide" },
-              { icon: Zap, label: "Response Time", value: "<50ms", sub: "Ultra fast" },
-            ].map((s, i) => (
-              <div key={i} className="stat-card bg-white rounded-xl p-4 border border-gray-200/60" style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">{s.label}</p>
-                  <div className="stat-icon w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                    <s.icon className="w-4 h-4 text-emerald-600" />
-                  </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+            {/* Card 1 */}
+            <div className="stat-card bg-white rounded-2xl p-5 border border-slate-200/80" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="stat-icon w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(5,150,105,0.1)" }}>
+                  <BarChart3 className="w-[18px] h-[18px] text-emerald-600" />
                 </div>
-                <p className="stat-value text-[22px] font-bold text-gray-800 leading-none mb-1" style={{ letterSpacing: "-0.02em" }}>{s.value}</p>
-                <p className="text-[11px] text-gray-500 font-medium">{s.sub}</p>
+                <p className="text-[13px] font-medium text-slate-500">Total Markets</p>
               </div>
-            ))}
+              <p className="stat-value text-[28px] font-bold text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>{markets.length}</p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="stat-card bg-white rounded-2xl p-5 border border-slate-200/80" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="stat-icon w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(34,197,94,0.1)" }}>
+                  <TrendingUp className="w-[18px] h-[18px] text-green-600" />
+                </div>
+                <p className="text-[13px] font-medium text-slate-500">24h Volume</p>
+              </div>
+              <p className="stat-value text-[28px] font-bold text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>$3.2B</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="stat-card bg-white rounded-2xl p-5 border border-slate-200/80" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="stat-icon w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(139,92,246,0.1)" }}>
+                  <Users className="w-[18px] h-[18px] text-purple-600" />
+                </div>
+                <p className="text-[13px] font-medium text-slate-500">Active Traders</p>
+              </div>
+              <p className="stat-value text-[28px] font-bold text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>12K+</p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="stat-card bg-white rounded-2xl p-5 border border-slate-200/80" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="stat-icon w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(245,158,11,0.1)" }}>
+                  <Zap className="w-[18px] h-[18px] text-amber-500" />
+                </div>
+                <p className="text-[13px] font-medium text-slate-500">Response Time</p>
+              </div>
+              <p className="stat-value text-[28px] font-bold text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>&lt;50ms</p>
+            </div>
+
           </div>
         </motion.div>
 

@@ -90,7 +90,7 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
   const filtered = activeTab === "All" ? items : items.filter(i => i.category === activeTab);
   const safeIdx = Math.min(featuredIdx, filtered.length - 1);
   const featured = filtered[safeIdx];
-  const sideItems = filtered;
+  const sideItems = filtered.filter((_, i) => i !== safeIdx);
   const FIcon = featured?.icon;
 
   return (
@@ -116,14 +116,14 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
       <div style={{ position: "absolute", top: -120, left: -120, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 65%)", filter: "blur(70px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: -80, right: -80, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(5,150,105,0.06) 0%, transparent 65%)", filter: "blur(60px)", pointerEvents: "none" }} />
 
-      <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
+      <div style={{ maxWidth: 1220, margin: "0 auto", position: "relative" }}>
 
         {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-60px" }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
           style={{ marginBottom: isMobile ? 32 : 52 }}
         >
           <div style={{
@@ -206,10 +206,10 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.38 }}
             style={{
               display: "grid",
               gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "1.5fr 1fr",
@@ -219,13 +219,13 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
           >
             {/* BIG FEATURED CARD */}
             {featured && (
-              <AnimatePresence mode="sync">
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={featured.title}
-                  initial={false}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.38 }}
                   style={{
                     borderRadius: isMobile ? 18 : 24, overflow: "hidden",
                     background: "#fff",
@@ -363,29 +363,29 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
               flexDirection: isMobile ? undefined : "column",
               gap: isMobile ? 12 : 14,
             }}>
-              {sideItems.slice(0, isMobile ? sideItems.length : 5).map((item, i) => {
+              {sideItems.slice(0, isMobile ? sideItems.length : 4).map((item, i) => {
                 const SIcon = item.icon;
                 const globalIdx = filtered.indexOf(item);
-                const isActive = globalIdx === safeIdx;
                 return (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 1 }}
+                    initial={{ opacity: 0, x: isMobile ? 0 : 18 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.38, delay: i * 0.07 }}
                     onClick={() => setFeaturedIdx(globalIdx)}
-                    whileHover={{ scale: 1.02, y: -6 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ scale: 1.012 }}
                     style={{
                       display: "flex", alignItems: "center", gap: 0,
                       borderRadius: isMobile ? 14 : 18, overflow: "hidden",
                       background: "#fff",
-                      border: isActive ? "1.5px solid #10b981" : "1.5px solid #e8edf2",
-                      boxShadow: isActive ? "0 4px 16px rgba(16,185,129,0.12)" : "0 2px 10px rgba(0,0,0,0.04)",
+                      border: "1.5px solid #e8edf2",
+                      boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
                       cursor: "pointer",
-                      transition: "border-color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.16,1,0.3,1)",
+                      transition: "border-color 0.22s, box-shadow 0.22s",
                     }}
                     onMouseEnter={e => {
                       e.currentTarget.style.borderColor = "#10b981";
-                      e.currentTarget.style.boxShadow = "0 24px 56px rgba(16,185,129,0.18), 0 10px 24px rgba(16,185,129,0.12)";
+                      e.currentTarget.style.boxShadow = "0 10px 32px rgba(16,185,129,0.13)";
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.borderColor = "#e8edf2";
@@ -441,9 +441,9 @@ export default function WhyChooseUs({ scrollTo, handleStartTrading }) {
 
               {/* Bottom CTA strip */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
                 style={{
                   padding: isMobile ? "16px 16px" : "20px 22px",
                   borderRadius: isMobile ? 14 : 18,

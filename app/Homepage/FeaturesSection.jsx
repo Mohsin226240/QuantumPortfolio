@@ -8,32 +8,28 @@ const FEATURES = [
     title: "Crypto Payment Gateway",
     desc: "Accept 100+ cryptocurrencies globally with instant confirmation.",
     image: "/crypto.png",
-    contain: true,
   },
   {
     title: "Crypto Wallet",
     desc: "Non-custodial multi-chain wallet for businesses and users.",
     image: "/Wallet.png",
-    contain: true,
-    scale: 1.25,
   },
   {
     title: "Payout Solutions",
     desc: "Instant crypto disbursements to any wallet worldwide.",
-    image: "/Payout.png",
-    contain: true,
-    scale: 1.20,
+    image: "/Paytout.png",
+    scale: 1.85,
   },
   {
     title: "Mass Payouts",
     desc: "Send thousands of crypto payments in one click.",
     image: "/MassPayouts.png",
-    contain: true,
+    scale: 0.95,
   },
   {
     title: "24/7 Support",
     desc: "Dedicated support team available around the clock.",
-    image: "/CustomerSupport.png",
+    image: "/Support.png",
     contain: true,
   },
 ];
@@ -43,10 +39,10 @@ function FeatureCard({ f, index, span }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.92 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 1, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
       style={{ gridColumn: span ? "span 1" : undefined }}
     >
       <div
@@ -59,7 +55,7 @@ function FeatureCard({ f, index, span }) {
           boxShadow: hov
             ? "0 20px 50px rgba(16,185,129,0.15), 0 8px 20px rgba(16,185,129,0.1)"
             : "0 1px 8px rgba(0,0,0,0.04)",
-          transform: hov ? "translateY(-14px) scale(1.03)" : "translateY(0) scale(1)",
+          transform: hov ? "translateY(-6px)" : "translateY(0)",
           transition: "all 0.6s cubic-bezier(0.25,0.1,0.25,1)",
           cursor: "default",
           overflow: "hidden",
@@ -83,11 +79,11 @@ function FeatureCard({ f, index, span }) {
             alt={f.title}
             style={{
               width: f.contain ? "auto" : "100%",
-              height: f.contain ? "95%" : "100%",
-              maxWidth: f.contain ? "95%" : "100%",
+              height: f.contain ? "85%" : "100%",
+              maxWidth: f.contain ? "80%" : "100%",
               objectFit: f.contain ? "contain" : "cover",
               display: "block",
-              transform: hov ? `scale(${f.scale ? f.scale + 0.05 : (f.contain ? 1.2 : 1.55)})` : `scale(${f.scale || (f.contain ? 1.15 : 1.45)})`,
+              transform: hov ? `scale(${f.scale ? f.scale + 0.1 : 1.55})` : `scale(${f.scale || 1.45})`,
               transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
             }}
           />
@@ -123,7 +119,7 @@ export default function FeaturesSection() {
   return (
     <section id="features" style={{
       position: "relative",
-      padding: "clamp(48px, 8vw, 80px) clamp(12px, 4vw, 20px) clamp(60px, 8vw, 100px)",
+      padding: "80px 20px 100px",
       background: "#fff",
       overflow: "hidden",
     }}>
@@ -142,10 +138,10 @@ export default function FeaturesSection() {
 
         {/* Section Heading - centered at top */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ textAlign: "center", marginBottom: 48 }}
         >
           <h2 className="font-heading" style={{
